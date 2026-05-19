@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+
+{% block title %}Fertilizer Recommendation - AgriSmart{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-success text-white text-center py-4 rounded-top-4">
+                <h2 class="fw-bold mb-0"><i class="fas fa-leaf me-2"></i>Fertilizer Recommendation</h2>
+                <p class="mb-0 mt-2 opacity-75">Get the best fertilizer for your soil and crop</p>
+            </div>
+            <div class="card-body p-5">
+
+                <!-- FORM -->
+                <form action="{{ url_for('predict_fertilizer') }}" method="POST" class="needs-validation" novalidate>
+                    <div class="row g-4">
+
+                        <div class="col-md-4">
+                            <label for="temp" class="form-label fw-bold text-muted">Temperature</label>
+                            <input type="number" class="form-control form-control-lg" id="temp" name="temp" min="0" max="60" step="0.1" required>
+                            <div class="invalid-feedback">Enter temperature between 0°C and 60°C</div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="humid" class="form-label fw-bold text-muted">Humidity</label>
+                            <input type="number" class="form-control form-control-lg" id="humid" name="humid" min="0" max="100" required>
+                            <div class="invalid-feedback">Humidity must be between 0 and 100%</div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="mois" class="form-label fw-bold text-muted">Moisture</label>
+                            <input type="number" class="form-control form-control-lg" id="mois" name="mois" min="0" max="100" required>
+                            <div class="invalid-feedback">Moisture must be between 0 and 100</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="soil" class="form-label fw-bold text-muted">Soil Type</label>
+                            <select class="form-select form-select-lg" id="soil" name="soil" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="0">Black</option>
+                                <option value="1">Clayey</option>
+                                <option value="2">Loamy</option>
+                                <option value="3">Red</option>
+                                <option value="4">Sandy</option>
+                            </select>
+                            <div class="invalid-feedback">Please select soil type</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="crop" class="form-label fw-bold text-muted">Crop Type</label>
+                            <select class="form-select form-select-lg" id="crop" name="crop" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="0">Barley</option>
+                                <option value="1">Cotton</option>
+                                <option value="2">Ground Nuts</option>
+                                <option value="3">Maize</option>
+                                <option value="4">Millets</option>
+                                <option value="5">Oil Seeds</option>
+                                <option value="6">Paddy</option>
+                                <option value="7">Pulses</option>
+                                <option value="8">Sugarcane</option>
+                                <option value="9">Tobacco</option>
+                                <option value="10">Wheat</option>
+                                <option value="11">Coffee</option>
+                                <option value="12">Kidneybeans</option>
+                                <option value="13">Orange</option>
+                                <option value="14">Pomegranate</option>
+                                <option value="15">Rice</option>
+                                <option value="16">Watermelon</option>
+                            </select>
+                            <div class="invalid-feedback">Please select crop</div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="nitro" class="form-label fw-bold text-muted">Nitrogen</label>
+                            <input type="number" class="form-control form-control-lg" id="nitro" name="nitro" min="0" max="150" required>
+                            <div class="invalid-feedback">Nitrogen must be between 0 and 150</div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="pota" class="form-label fw-bold text-muted">Potassium</label>
+                            <input type="number" class="form-control form-control-lg" id="pota" name="pota" min="0" max="100" required>
+                            <div class="invalid-feedback">Potassium must be between 0 and 100</div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="phos" class="form-label fw-bold text-muted">Phosphorous</label>
+                            <input type="number" class="form-control form-control-lg" id="phos" name="phos" min="0" max="100" required>
+                            <div class="invalid-feedback">Phosphorous must be between 0 and 100</div>
+                        </div>
+
+                        <div class="col-12 text-center mt-5">
+                            <button type="submit" class="btn btn-success btn-lg px-5 py-3 rounded-pill fw-bold shadow hover-effect">
+                                <i class="fas fa-flask me-2"></i> Predict Fertilizer
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                {% if result %}
+                <div class="mt-5 text-center">
+                    <div class="card bg-light border-success border-2 shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title text-success fw-bold mb-3">Recommended Fertilizer</h4>
+                            <p class="display-6 text-dark mb-0">{{ result }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Validation Script -->
+<script>
+(() => {
+  'use strict';
+  const forms = document.querySelectorAll('.needs-validation');
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
+
+{% endblock %}

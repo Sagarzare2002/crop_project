@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% block hero %}
+<div class="hero-section text-center text-white" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ url_for('static', filename='images/farm_background.jpg') }}'); padding: 100px 0; background-size: cover; background-position: center;">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Welcome to AgriSmart</h1>
+        <p class="lead mb-4">Smart solutions for modern agriculture. Improve your yield with AI-driven recommendations.</p>
+
+        <!-- Existing Get Started Button -->
+        <a href="#services" class="btn btn-success btn-lg px-5 me-3">Get Started</a>
+        <br>
+
+        <!-- NEW Crop Information Button (Below Get Started style) -->
+       <a href="{{ url_for('crop_info') }}"
+   class="btn btn-outline-light btn-lg px-5 mt-3">
+    🌾 Crop Information
+</a>
+<!-- NEW Fertilizer Detail Button -->
+<a href="{{ url_for('detail') }}"
+   class="btn btn-outline-light btn-lg px-5 mt-3">
+    🌿 Fertilizer Details
+</a>
+
+
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="services" class="container">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Our Services</h2>
+        <p class="text-muted">Choose a service to get started</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Crop Recommendation Card -->
+        <div class="col-md-5">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <div class="position-relative" style="height: 250px;">
+                    <img src="{{ url_for('static', filename='images/crop_background.jpg') }}" class="card-img-top w-100 h-100 object-fit-cover" alt="Crop Recommendation" style="object-fit: cover;">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-25"></div>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <h3 class="card-title fw-bold mb-3">Crop Recommendation</h3>
+                    <p class="card-text text-muted mb-4">
+                        Find the most suitable crop for your land based on soil nutrients, weather conditions, and ph level. Maximize your production with data-driven choices.
+                    </p>
+                    <a href="{{ url_for('crop_recommendation') }}" class="btn btn-outline-success rounded-pill px-4">Predict Crop &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fertilizer Recommendation Card -->
+        <div class="col-md-5">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <div class="position-relative" style="height: 250px;">
+                    <img src="{{ url_for('static', filename='images/fertilizer.jpg') }}" class="card-img-top w-100 h-100 object-fit-cover" alt="Fertilizer Recommendation" style="object-fit: cover;">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-25"></div>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <h3 class="card-title fw-bold mb-3">Fertilizer Prediction </h3>
+                    <p class="card-text text-muted mb-4">
+                        Get the best fertilizer recommendation for your specific crop and soil conditions. Ensure optimal nutrient balance for healthy plant growth.
+                    </p>
+                    <a href="{{ url_for('fertilizer_recommendation') }}" class="btn btn-outline-success rounded-pill px-4">Find Fertilizer &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 py-5">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h2 class="fw-bold mb-4">Why Choose AgriSmart?</h2>
+            <ul class="list-unstyled">
+                <li class="mb-3 d-flex align-items-center">
+                    <i class="fas fa-check-circle text-success me-3 fa-lg"></i>
+                    <span><strong>Precision Agriculture:</strong> Leverage AI models for accurate predictions.</span>
+                </li>
+                <li class="mb-3 d-flex align-items-center">
+                    <i class="fas fa-check-circle text-success me-3 fa-lg"></i>
+                    <span><strong>Easy to Use:</strong> Simple interface designed for farmers and agriculturalists.</span>
+                </li>
+                <li class="mb-3 d-flex align-items-center">
+                    <i class="fas fa-check-circle text-success me-3 fa-lg"></i>
+                    <span><strong>Free of Cost:</strong> Access valuable insights without any subscription fees.</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+             <div class="row g-2">
+                <div class="col-6">
+                    <img src="{{ url_for('static', filename='images/f1.webp') }}" class="img-fluid rounded shadow-sm mb-2" alt="Farmer 1">
+                    <img src="{{ url_for('static', filename='images/f2.jpeg') }}" class="img-fluid rounded shadow-sm" alt="Farmer 2">
+                </div>
+                <div class="col-6">
+                    <img src="{{ url_for('static', filename='images/f3.png') }}" class="img-fluid rounded shadow-sm mb-2 mt-4" alt="Farmer 3">
+                    <img src="{{ url_for('static', filename='images/f4.jpg') }}" class="img-fluid rounded shadow-sm" alt="Farmer 4">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

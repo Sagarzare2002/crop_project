@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Crop Information</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f5;
+    overflow-y:scroll;
+}
+
+/* Each full screen */
+.screen{
+    height:100vh;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+    gap:15px;
+    padding:15px;
+}
+
+/* Card */
+.card{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    cursor:pointer;
+}
+
+/* Image fills entire card */
+.card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:0.4s;
+}
+
+/* Overlay text */
+.card-content{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.65);
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    opacity:0;
+    transition:0.4s;
+    padding:20px;
+}
+
+/* Hover effects */
+.card:hover img{
+    transform:scale(1.1);
+}
+
+.card:hover .card-content{
+    opacity:1;
+}
+
+.card-content h2{
+    font-size:28px;
+    margin-bottom:10px;
+    color:#8aff8a;
+}
+
+.card-content p{
+    font-size:16px;
+    line-height:1.6;
+}
+
+/* Mobile */
+@media(max-width:700px){
+    .screen{
+        grid-template-columns:1fr;
+        grid-template-rows:repeat(4,1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div class="screen">
+
+<div class="card">
+<img src="{{ url_for('static', filename='images/rice.png') }}">
+<div class="card-content">
+<h2>Rice</h2>
+<p>Soil: Clayey<br>Climate: Warm & Humid<br>Water: High</p>
+</div>
+</div>
+
+<div class="card">
+<img src="{{ url_for('static', filename='images/crop_background.jpg') }}">
+<div class="card-content">
+<h2>Wheat</h2>
+<p>Soil: Loamy<br>Climate: Cool<br>Rainfall: Moderate</p>
+</div>
+</div>
+
+<div class="card">
+<img src="{{ url_for('static', filename='images/maize.png') }}">
+<div class="card-content">
+<h2>Maize</h2>
+<p>Soil: Well-drained<br>Climate: Warm<br>Growth: Fast</p>
+</div>
+</div>
+
+<div class="card">
+<img src="{{ url_for('static', filename='images/suger_cane.png') }}">
+<div class="card-content">
+<h2>Sugarcane</h2>
+<p>Soil: Fertile<br>Climate: Tropical<br>Water: High</p>
+</div>
+</div>
+
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen">
+
+<div class="card">
+<img src="{{ url_for('static', filename='images/cotton.png') }}">
+<div class="card-content">
+<h2>Cotton</h2>
+<p>Soil: Black soil<br>Climate: Warm<br>Rainfall: Low</p>
+</div>
+</div>
+
+<div class="card">
+<img src="{{ url_for('static', filename='images/groundnut.png') }}">
+<div class="card-content">
+<h2>Groundnut</h2>
+<p>Soil: Sandy loam<br>Climate: Dry<br>Duration: Short</p>
+</div>
+</div>
+
+<div class="card">
+<img src="{{ url_for('static', filename='images/barli.png') }}">
+<div class="card-content">
+<h2>Barley</h2>
+<p>Soil: Light loam<br>Climate: Cool<br>Use: Fodder</p>
+</div>
+</div>
+
+<div class="card">
+<img src="{{ url_for('static', filename='images/millet.png') }}">
+<div class="card-content">
+<h2>Millet</h2>
+<p>Soil: Dry land<br>Climate: Hot<br>Water: Low</p>
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

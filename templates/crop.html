@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+
+{% block title %}Crop Recommendation - AgriSmart{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-success text-white text-center py-4 rounded-top-4">
+                <h2 class="fw-bold mb-0"><i class="fas fa-seedling me-2"></i>Crop Recommendation</h2>
+                <p class="mb-0 mt-2 opacity-75">Enter soil and climate data to get the best crop suggestion</p>
+            </div>
+            <div class="card-body p-5">
+
+                <!-- FORM -->
+                <form action="{{ url_for('predict_crop') }}" method="POST" class="needs-validation" novalidate>
+                    <div class="row g-4">
+
+                        <div class="col-md-4">
+                            <label for="Nitrogen" class="form-label fw-bold text-muted">Nitrogen (N)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-flask text-success"></i></span>
+                                <input type="number" class="form-control form-control-lg" id="Nitrogen" name="Nitrogen" min="0" max="150" placeholder="e.g. 90" required>
+                                <div class="invalid-feedback">Nitrogen must be between 0 and 150</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="Phosporus" class="form-label fw-bold text-muted">Phosphorus (P)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-flask text-success"></i></span>
+                                <input type="number" class="form-control form-control-lg" id="Phosporus" name="Phosporus" min="0" max="150" placeholder="e.g. 42" required>
+                                <div class="invalid-feedback">Phosphorus must be between 0 and 150</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="Potassium" class="form-label fw-bold text-muted">Potassium (K)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-flask text-success"></i></span>
+                                <input type="number" class="form-control form-control-lg" id="Potassium" name="Potassium" min="0" max="200" placeholder="e.g. 43" required>
+                                <div class="invalid-feedback">Potassium must be between 0 and 200</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="Temperature" class="form-label fw-bold text-muted">Temperature (°C)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-temperature-high text-danger"></i></span>
+                                <input type="number" step="0.01" class="form-control form-control-lg" id="Temperature" name="Temperature" min="0" max="50" placeholder="e.g. 20.8" required>
+                                <div class="invalid-feedback">Temperature must be between 0 and 50°C</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="Humidity" class="form-label fw-bold text-muted">Humidity (%)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-tint text-primary"></i></span>
+                                <input type="number" step="0.01" class="form-control form-control-lg" id="Humidity" name="Humidity" min="10" max="100" placeholder="e.g. 82.0" required>
+                                <div class="invalid-feedback">Humidity must be between 10% and 100%</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="Ph" class="form-label fw-bold text-muted">pH Value</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-vial text-warning"></i></span>
+                                <input type="number" step="0.01" class="form-control form-control-lg" id="Ph" name="Ph" min="2.0" max="13.9" placeholder="e.g. 6.5" required>
+                                <div class="invalid-feedback">pH must be between 2.0 and 13.9</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="Rainfall" class="form-label fw-bold text-muted">Rainfall (mm)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-cloud-showers-heavy text-info"></i></span>
+                                <input type="number" step="0.01" class="form-control form-control-lg" id="Rainfall" name="Rainfall" min="20" max="1000" placeholder="e.g. 202.9" required>
+                                <div class="invalid-feedback">Rainfall must be between 20 and 1000 mm</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-center mt-5">
+                            <button type="submit" class="btn btn-success btn-lg px-5 py-3 rounded-pill fw-bold shadow hover-effect">
+                                <i class="fas fa-search me-2"></i> Get Recommendation
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                {% if result %}
+                <div class="mt-5 text-center">
+                    <div class="card bg-light border-success border-2 shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title text-success fw-bold mb-3">Recommendation Result</h4>
+                            <p class="display-6 text-dark mb-0">{{ result }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Validation Script -->
+<script>
+(() => {
+  'use strict';
+  const forms = document.querySelectorAll('.needs-validation');
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
+
+{% endblock %}
